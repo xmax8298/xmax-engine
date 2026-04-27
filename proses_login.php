@@ -26,24 +26,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
+   if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
         
-        // Verifikasi Hash Bcrypt
+        // TES MODE: Ganti password_verify jadi perbandingan string biasa (===)
         if ($password === $row['password']) {
             
-            // Login Berhasil - Cegah Session Hijacking
             session_regenerate_id(true);
-
             $_SESSION['user_id']  = $row['id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['role']     = $row['role']; 
             $_SESSION['status']   = "login";
 
-            header("Location: dashboard.php");
+            // PAKAI JAVASCRIPT: Biar gak mental karena masalah Header di VPS
+            echo "<script>
+                    alert('Login Berhasil! Mengalihkan ke Dashboard...');
+                    window.location.href='dashboard.php';
+                  </script>";
             exit();
         }
     }
+    
+    // Jika gagal
+    $_SESSION['error_msg'] = "Username atau Password salah!";
+    echo "<script>
+            alert('Gagal: Username atau Password Salah!');
+            window.location.href='login.php';
+          </script>";
+    exit();
     
     // Jika gagal, balik ke login dengan pesan error
     $_SESSION['error_msg'] = "Username atau Password salah!";
