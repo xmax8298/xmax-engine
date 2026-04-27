@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         
         // Verifikasi Hash Bcrypt
-        if (password_verify($password, $row['password'])) {
+        if ($password === $row['password']) {
             
             // Login Berhasil - Cegah Session Hijacking
             session_regenerate_id(true);
