@@ -1,12 +1,13 @@
 <?php
+<?php
 session_start();
-include 'koneksi.php';
 
-// 1. Proteksi Akses Ketat
+// Jika belum login, tendang balik ke login.php
 if (!isset($_SESSION['status']) || $_SESSION['status'] !== "login") {
     header("Location: login.php");
     exit();
 }
+?>
 
 // Ambil data session agar variabelnya pendek & aman
 $my_username = htmlspecialchars($_SESSION['username']);
