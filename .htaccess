@@ -1,0 +1,14 @@
+# Proteksi IP untuk Admin Panel XMAXengine
+<RequireAll>
+    # Masukkan IP rumah atau kantor lu di bawah ini
+    Require ip 170.62.95.226 
+    
+    # Kalau lu punya IP cadangan atau IP VPN statis
+    # Require ip 111.111.111.111
+</RequireAll>
+
+# Opsional: Custom Error Page biar hacker bingung
+ErrorDocument 403 "Forbidden: System Protected by XMAX Security"
+
+# Matikan fitur intip folder (Directory Browsing)
+Options -Indexes
