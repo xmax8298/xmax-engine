@@ -1,0 +1,187 @@
+/* ==========================================================================
+   🟡 XMAX THEME ENGINE (Ganti warna sesuka hati di sini)
+   ========================================================================== */
+:root {
+    --accent: #f0d481;          /* Warna Emas/Primary */
+    --accent-glow: rgba(240, 212, 129, 0.4);
+    --bg-base: #070709;         /* Super Dark Background */
+    --surface: rgba(20, 20, 25, 0.6); /* Transparansi Kaca */
+    --surface-hover: rgba(40, 40, 50, 0.8);
+    --border: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-muted: #8a8a93;
+    --danger: #ff4757;
+    --sidebar-width: 280px;
+}
+
+/* ==========================================================================
+   🔴 RESET & BASE
+   ========================================================================== */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Efek Cahaya di Background (Mewah!) --- */
+.bg-glow {
+    position: absolute; border-radius: 50%; filter: blur(100px); z-index: -1;
+}
+.glow-1 {
+    width: 400px; height: 400px; background: var(--accent-glow);
+    top: -100px; left: -100px; opacity: 0.5;
+}
+.glow-2 {
+    width: 300px; height: 300px; background: rgba(0, 150, 255, 0.2);
+    bottom: 10%; right: 5%; opacity: 0.6;
+}
+
+/* ==========================================================================
+   🔵 LAYOUT WRAPPER
+   ========================================================================== */
+.app-container {
+    display: flex; min-height: 100vh;
+}
+
+/* ==========================================================================
+   🟠 SIDEBAR (GLASS & FLOATING STYLE)
+   ========================================================================== */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    padding: 20px; transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1000;
+}
+
+.sidebar-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
+}
+.sidebar-header h2 { font-family: 'Orbitron', sans-serif; font-size: 22px; letter-spacing: 1px; }
+.accent-text { color: var(--accent); }
+.close-btn { background: none; border: none; color: var(--text-main); font-size: 20px; display: none; cursor: pointer; }
+
+/* Profil Mini di Sidebar */
+.user-profile-mini {
+    display: flex; align-items: center; gap: 15px; padding: 15px;
+    background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 30px;
+}
+.avatar {
+    width: 40px; height: 40px; background: var(--accent); color: #000;
+    border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.info .name { font-weight: 700; font-size: 14px; }
+.info .role { font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: 1px; }
+
+/* Menu Navigasi */
+.sidebar-nav { display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto; }
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+.nav-title { font-size: 10px; color: var(--text-muted); font-weight: 700; margin: 15px 0 5px 10px; letter-spacing: 1px; }
+.nav-item {
+    display: flex; align-items: center; gap: 15px; padding: 12px 15px;
+    color: var(--text-muted); text-decoration: none; border-radius: 10px; font-size: 14px; font-weight: 500;
+    transition: all 0.3s ease;
+}
+.nav-item i { font-size: 16px; width: 20px; text-align: center; }
+.nav-item:hover { background: var(--surface-hover); color: var(--text-main); transform: translateX(5px); }
+.nav-item.active { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(240, 212, 129, 0.2); }
+.text-danger:hover { background: rgba(255, 71, 87, 0.1); color: var(--danger); }
+
+/* ==========================================================================
+   🟣 MAIN CONTENT & TOPBAR
+   ========================================================================== */
+.main-content { flex: 1; display: flex; flex-direction: column; width: calc(100% - var(--sidebar-width)); }
+
+.topbar {
+    height: 80px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+    background: transparent; z-index: 10;
+}
+.menu-trigger { background: none; border: none; color: var(--text-main); font-size: 24px; cursor: pointer; display: none; }
+
+.search-bar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 30px;
+    padding: 10px 20px; display: flex; align-items: center; gap: 10px; width: 300px; backdrop-filter: blur(10px);
+}
+.search-bar input { background: none; border: none; color: var(--text-main); outline: none; width: 100%; }
+
+.topbar-actions { display: flex; gap: 15px; }
+.icon-btn {
+    width: 45px; height: 45px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-main); font-size: 16px; cursor: pointer; transition: 0.3s;
+}
+.icon-btn:hover { background: var(--accent); color: #000; }
+.pulse { position: relative; }
+.pulse::after {
+    content: ''; position: absolute; top: 10px; right: 12px; width: 8px; height: 8px;
+    background: var(--danger); border-radius: 50%; box-shadow: 0 0 10px var(--danger);
+}
+
+/* ==========================================================================
+   🟢 DASHBOARD WIDGETS & GLASS PANELS
+   ========================================================================== */
+.dashboard-body { padding: 0 40px 40px; display: flex; flex-direction: column; gap: 30px; }
+
+.glass-panel {
+    background: var(--surface); backdrop-filter: blur(20px); border: 1px solid var(--border);
+    border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: 0.3s;
+}
+.glass-panel:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+/* Banner Spesial */
+.welcome-banner { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, rgba(30,30,35,0.8), rgba(15,15,20,0.8)); border-left: 4px solid var(--accent); }
+.banner-content h1 { font-size: 28px; margin-bottom: 5px; }
+.banner-content p { color: var(--text-muted); font-size: 14px; }
+.banner-graphic i { font-size: 60px; color: var(--accent-glow); }
+
+/* Stats Grid */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.stat-box { display: flex; align-items: center; gap: 20px; }
+.stat-icon {
+    width: 60px; height: 60px; border-radius: 15px; background: rgba(240, 212, 129, 0.1);
+    color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 24px;
+}
+.stat-details h3 { font-size: 28px; font-weight: 700; margin-bottom: 2px; }
+.stat-details p { font-size: 13px; color: var(--text-muted); }
+
+/* Work Area (Tabel & Progress) */
+.work-area { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+.panel-header h3 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.btn-small { background: var(--accent); color: #000; border: none; padding: 5px 15px; border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 12px; }
+
+.progress-wrapper { margin-bottom: 20px; }
+.progress-wrapper p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; }
+.progress-bar .fill { height: 100%; background: var(--accent); border-radius: 10px; box-shadow: 0 0 10px var(--accent-glow); }
+
+/* ==========================================================================
+   📱 SUPER RESPONSIVE MOBILE TWEAKS
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .work-area { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { position: fixed; left: -100%; top: 0; height: 100vh; }
+    .sidebar.active { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.8); }
+    .main-content { width: 100%; }
+    .close-btn, .menu-trigger { display: block; }
+    
+    .topbar { padding: 0 20px; }
+    .search-bar { display: none; /* Sembunyikan pencarian di HP biar rapi */ }
+    
+    .dashboard-body { padding: 0 20px 20px; }
+    .welcome-banner { flex-direction: column; text-align: center; gap: 20px; }
+    .banner-graphic { display: none; }
+}
